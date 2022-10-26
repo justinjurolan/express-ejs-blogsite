@@ -1,0 +1,21 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <% if (blog.length > 0) { %>
+                    <div class="margin-center centered">
+                        <% for (let blogs of blog) { %>
+                            <h1><%= blogs.title%></h1>
+                                <p><%= blogs.description%></p>   
+                            <% } %>    
+                    </div>
+                    <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+                    <% } else { %>
+                        <h1>No Blog Found!</h1>
+                        <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>

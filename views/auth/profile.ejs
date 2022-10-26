@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <div class="grid">
+                <article class="card product-item">
+                    <header class="card__header">
+                        <% if (user.imageUrl !== "") { %>
+                        <div class="image-profile">
+                            <img src="/<%= user.imageUrl %>" alt="<%= user.username %>">
+                        </div>
+                        <% } %>
+                    </header>
+                    <div class="card__content">
+                        <h4 class="product__price">
+                            Username: <%= user.username %>
+                            </h4>
+                        <h4 class="product__price">
+                            First Name: <%= user.firstname %>
+                        </h4>
+                        <h4 class="product__price">
+                            Last Name: <%= user.lastname %>
+                            </h4>
+                            <h4 class="product__price">
+                            Email: <%= user.email %>
+                            </h4>
+                            <h4 class="product__price">
+                            Password: ******
+                            </h4>
+                    </div>
+                    <div class="card__actions">
+                        <a href="/edit-user/<%= user.id %>?edit=true" class="btn">Update Account</a>
+                        <form action="/delete-user" method="POST">
+                            <input type="hidden" value="<%= user.id %>" name="userId">
+                            <button class="btn" type="submit">Delete Account</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </main>
+            <%- include('../includes/end.ejs') %>
+
+            

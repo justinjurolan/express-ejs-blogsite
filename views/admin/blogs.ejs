@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <% if (blog.length > 0) { %>
+                    <div class="grid">
+                        <% for (let blogs of blog) { %>
+                            <article class="card product-item">
+                                <header class="card__header">
+                                    <h1 class="product__title">
+                                       Title: <%= blogs.title %>
+                                    </h1>
+                                </header>
+                                <div class="card__image">
+                                    <img src="/<%= blogs.imageUrl %>" alt="<%= blogs.title %>">
+                                </div>
+                                <div class="card__content">
+                                    <h4 class="product__price">
+                                       Description: <%= blogs.description %>
+                                    </h4>
+                                </div>
+                                <div class="card__actions">
+                                    <a href="/dashboard/edit-blog/<%= blogs.id %>?edit=true" class="btn">Edit</a>
+                                    <form action="/dashboard/delete-blog" method="POST">
+                                        <input type="hidden" value="<%= blogs.id %>" name="blogId">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No Blog Found!</h1>
+                        <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>

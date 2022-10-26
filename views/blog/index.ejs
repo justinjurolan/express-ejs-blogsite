@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <div class="centered">
+            <form action="/blogs/search" method="POST">
+                <input type="search" class="input-search" name="searchBlog" placeholder="Search Blog">
+            </form>
+        </div>
+        <% if (blog.length > 0) { %>
+            <div class="container">
+                <% for (let blogs of blog) { %>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4 class="card-title"><%= blogs.title%></h4>
+                            <div class="card-subtitle text-muted mb-2">
+                                <%= blogs.createdAt.toLocaleString() %>
+                            </div>
+                            <div class="text-muted mb-2">
+                                Posted by: <%= blogs.createdBy %>
+                               </div>
+                            <div class="card-text mb-2">
+                                <%= blogs.description %> 
+                            </div>
+                            <a href="/blog/<%= blogs._id %>" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                    <% } %>    
+            </div>
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+        <% } else { %>
+            <h1>No Blog Found!</h1>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>

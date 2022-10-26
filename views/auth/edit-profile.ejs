@@ -1,0 +1,43 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <form class="product-form" action="/edit-user" method="POST" enctype="multipart/form-data">
+            <div class="form-control">
+                <label for="image">Profile Picture</label>
+                <input 
+                    type="file" 
+                    name="image" 
+                    id="image" >
+            </div>
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" class="<%= validationErrors.find(e => e.param === 'username') ? 'invalid' : ''%>" name="username" id="username" value="<% if (editing || hasError) { %><%= profile.username %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="firstname">First Name</label>
+                <input type="text" class="<%= validationErrors.find(e => e.param === 'firstname') ? 'invalid' : ''%>" name="firstname" id="firstname" value="<% if (editing || hasError) { %><%= profile.firstname %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="lastname">Last Name</label>
+                <input type="text" class="<%= validationErrors.find(e => e.param === 'lastname') ? 'invalid' : ''%>" name="lastname" id="lastname" value="<% if (editing || hasError) { %><%= profile.lastname %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : ''%>" name="email" id="email" value="<% if (editing || hasError) { %><%= profile.email %><% } %>">
+            </div>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= profile.id %>" name="userId">
+            <% } %>
+            <button class="btn" type="submit">Update User</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
