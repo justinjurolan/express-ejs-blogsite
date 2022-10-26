@@ -10,7 +10,7 @@ const { checkUser } = require("./util/is-auth");
 
 const errorController = require("./controllers/error");
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODBURI;
 
 const app = express();
 
