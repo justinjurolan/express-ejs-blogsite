@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
+require("dotenv").config();
 
 const cookieParser = require("cookie-parser");
 const { checkUser } = require("./util/is-auth");
